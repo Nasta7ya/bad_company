@@ -1,4 +1,4 @@
-import { GangMemberSlot, HeistCard, LootCard, UpgradeCard } from '../types/game';
+import { GangMemberSlot, HeistCard, LootCard, ResourceSymbol, UpgradeCard } from '../types/game';
 
 export const RECRUIT_COSTS = [2, 3, 3, 4, 4, 5, 5, 6];
 

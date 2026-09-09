@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GameMode, GameState, HeistCard, PlayerColor, PlayerState, ResourceSymbol, UpgradeCard } from './types/game';
+import { createInitialGangBoard } from './data/initialDeck';
 import {
   activatePlayerGang,
   applyRecruitUpgrade,
@@ -154,9 +155,17 @@ export default function App() {
       }
     };
 
-    ws.onerror = () => {
+    ws.onerror = (err) => {
       setIsConnecting(false);
-      alert('Не вдалося підключитися до онлайн-сервера. Перевірте з’єднання.');
+      setIsOnline(false);
+      console.warn('WebSocket connection not available:', err);
+      if (window.location.hostname.endsWith('github.io')) {
+        alert(
+          'GitHub Pages — це статичний хостинг (без бекенд-сервера для онлайн-кімнат). Режими «Соло проти бота/поліції» та «Локальна гра на одному екрані» працюють повністю автономно!'
+        );
+      } else {
+        alert('Не вдалося підключитися до онлайн-сервера.');
+      }
     };
 
     ws.onclose = () => {
@@ -567,6 +576,22 @@ export default function App() {
     );
   };
 
+  const handleRerollGang = (playerId: string) => {
+    if (!gameState || gameState.round !== 1 || gameState.hasRolled) return;
+    const updatedPlayers = gameState.players.map(p =>
+      p.id === playerId ? { ...p, gangBoard: createInitialGangBoard(true) } : p
+    );
+    const updatedState: GameState = {
+      ...gameState,
+      players: updatedPlayers,
+    };
+    sound.playClick();
+    broadcastState(
+      updatedState,
+      `${gameState.players.find(p => p.id === playerId)?.name} перетасував стартовий склад банди!`
+    );
+  };
+
   const handleRestart = () => {
     setInGame(false);
     setGameState(null);
@@ -825,6 +850,8 @@ export default function App() {
               setPendingFixerSum(null);
             }}
             onActivateFixer={handleActivateFixer}
+            canRerollGang={gameState.round === 1 && !gameState.hasRolled && viewingPlayer.id === currentPlayerId}
+            onRerollGang={() => handleRerollGang(viewingPlayer.id)}
           />
         )}
 
