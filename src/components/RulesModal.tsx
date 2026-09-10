@@ -12,8 +12,15 @@ export const RulesModal: React.FC<RulesModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-700 rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl text-white overflow-hidden">
+    <div
+      id="rules-modal-backdrop"
+      onClick={onClose}
+      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto cursor-pointer"
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        className="bg-slate-900 border border-slate-700 rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl text-white overflow-hidden cursor-default my-auto animate-in fade-in zoom-in-95 duration-150"
+      >
         {/* Modal Header */}
         <div className="flex items-center justify-between p-5 border-b border-slate-800 bg-slate-950/60">
           <div className="flex items-center gap-2.5">
@@ -143,7 +150,7 @@ export const RulesModal: React.FC<RulesModalProps> = ({ isOpen, onClose }) => {
                   <strong>4 Золоті кубики банди (1–6):</strong> дають суми від 2 до 12.
                 </li>
                 <li>
-                  <strong>1 Чорний поліцейський кубик (0, 1, 1, 2, 2, 3):</strong> визначає, на скільки кроків просунеться патрульне авто наприкінці ходу Боса.
+                  <strong>1 Чорний поліцейський кубик (0, 1, 2):</strong> визначає, на скільки кроків (0, 1 або 2) просунеться патрульне авто наприкінці ходу Боса.
                 </li>
                 <li>
                   <strong>Перекидання ($1):</strong> Бос може сплатити $1 зі свого запасу, щоб перекинути будь-яку кількість кубиків (включаючи поліцейський). Робити це можна скільки завгодно разів, поки вистачає монет!
@@ -212,7 +219,7 @@ export const RulesModal: React.FC<RulesModalProps> = ({ isOpen, onClose }) => {
             <div className="space-y-3">
               <h4 className="font-bold text-base text-amber-300">Міський трек погоні та Поліція</h4>
               <p className="text-xs">
-                Міський трек складається з 26 клітинок (0–25). Наприкінці ходу Боса поліцейське авто рухається на кількість клітинок із чорного кубика.
+                Міський трек складається з 26 клітинок (0–25). Гравці стартують з клітинки «СТАРТ» (0). У мультиплеєрі поліція стартує позаду зі штрафних клітинок (-2 або -3), а в режимі соло-випробування — одразу з 3-ї клітинки. Наприкінці ходу Боса поліцейське авто рухається вперед.
               </p>
               <ul className="list-disc pl-5 space-y-1.5 text-xs">
                 <li>
@@ -242,7 +249,7 @@ export const RulesModal: React.FC<RulesModalProps> = ({ isOpen, onClose }) => {
                 <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700">
                   <strong className="text-amber-400">2. Соло-випробування проти Поліції (Офіційний варіант книги правил):</strong>
                   <p className="mt-0.5 text-slate-300">
-                    Ви граєте самі проти безжальної поліції. Поліція стартує на клітинці 6 і рухається на <strong>результат кубика + 1 крок</strong> кожен раунд! Щоб завоювати кольє, потрібно зібрати щонайменше 3 однакові трофеї. Якщо поліція наздоганяє або обганяє ваше авто — ви негайно програєте (схоплені)!
+                    Ви граєте самі проти безжальної поліції. Трек починається з позначки «СТАРТ». Поліція стартує на клітинці 3 і рухається на <strong>результат кубика + 1 крок</strong> кожен раунд! Щоб завоювати кольє, потрібно зібрати щонайменше 3 однакові трофеї. Якщо поліція наздоганяє або обганяє ваше авто — ви негайно програєте (вас схоплено)!
                   </p>
                 </div>
               </div>
@@ -256,14 +263,15 @@ export const RulesModal: React.FC<RulesModalProps> = ({ isOpen, onClose }) => {
                 Гра завершується, коли будь-який гравець завершує своє <strong>6-те пограбування</strong> АБО будь-яке авто в'їжджає у <strong>червону зону порту (клітинка 22+)</strong>. Дограється поточне коло, щоб кожен побував Босом однакову кількість разів.
               </p>
 
-              <div className="p-3 rounded-xl bg-slate-800/90 border border-slate-700 space-y-1 text-xs">
+              <div className="p-3 rounded-xl bg-slate-800/90 border border-slate-700 space-y-1.5 text-xs">
                 <div className="font-bold text-slate-200 mb-1">Формула переможних очок:</div>
                 <div>✓ Очки за всі виконані пограбування</div>
-                <div>✓ Очки з карт вербування (бонуси на планшеті)</div>
+                <div>✓ <strong>Карти вербування на грабіжниках:</strong> враховуються ПО <em>лише з останньої (верхньої)</em> доданої карти на кожному номері грабіжника!</div>
+                <div>✓ Бонуси просування міпла вербування (після завершення шкали $5 → +3 ПО)</div>
                 <div>✓ Очки з карт здобичі (фінальні карти)</div>
-                <div>✓ +2 ПО за кожне кольє, яке ви утримуєте наприкінці гри</div>
+                <div>✓ +2 ПО за кожне королівське кольє, яке ви утримуєте наприкінці гри</div>
                 <div>✓ +1 ПО за кожні 2 залишені маркери на незавершених справах і завданнях</div>
-                <div className="text-red-400 font-bold">✗ -3 ПО штрафу, якщо ваше авто позаду поліції!</div>
+                <div className="text-red-400 font-bold">✗ -3 ПО штрафу, якщо ваше авто позаду поліцейського авто!</div>
               </div>
 
               <p className="text-xs text-slate-400 italic">

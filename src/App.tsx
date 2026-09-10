@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GameMode, GameState, HeistCard, PlayerColor, PlayerState, ResourceSymbol, UpgradeCard } from './types/game';
 import { createInitialGangBoard } from './data/initialDeck';
 import {
@@ -17,6 +17,7 @@ import {
   rollDice,
   setBossPairing,
   useLootCard,
+  makeLogId,
 } from './utils/gameLogic';
 import { runBotTurn } from './utils/aiBot';
 import { sound } from './utils/audio';
@@ -36,14 +37,13 @@ import { GameOverModal } from './components/GameOverModal';
 import { SymbolAllocationModal } from './components/SymbolAllocationModal';
 import { NextHeistPickerModal } from './components/NextHeistPickerModal';
 import { TurnGuidanceBar } from './components/TurnGuidanceBar';
+import { EventLog } from './components/EventLog';
 
 // Icons
 import {
   Users,
   Eye,
   ScrollText,
-  Copy,
-  Check,
   RotateCcw,
   Sparkles,
   ArrowLeft,
@@ -80,13 +80,6 @@ export default function App() {
   // Sound settings
   const [isMuted, setIsMuted] = useState<boolean>(false);
 
-  // Online Multiplayer state
-  const [isOnline, setIsOnline] = useState<boolean>(false);
-  const [roomCode, setRoomCode] = useState<string | null>(null);
-  const [isConnecting, setIsConnecting] = useState<boolean>(false);
-  const [copiedCode, setCopiedCode] = useState<boolean>(false);
-  const wsRef = useRef<WebSocket | null>(null);
-
   // Log of in-game events
   const [eventLogs, setEventLogs] = useState<{ id: string; text: string; time: string }[]>([]);
 
@@ -107,85 +100,21 @@ export default function App() {
     sound.setMuted(next);
   };
 
-  // -------------------------------------------------------------
-  // WebSocket Multiplayer Setup
-  // -------------------------------------------------------------
-  const connectWebSocket = (
-    code: string,
-    pId: string,
-    pName: string,
-    initialState?: GameState
-  ) => {
-    setIsConnecting(true);
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${protocol}//${window.location.host}/ws`;
-
-    const ws = new WebSocket(wsUrl);
-    wsRef.current = ws;
-
-    ws.onopen = () => {
-      setIsConnecting(false);
-      setIsOnline(true);
-      setRoomCode(code);
-      ws.send(
-        JSON.stringify({
-          type: initialState ? 'create_room' : 'join_room',
-          roomId: code,
-          playerId: pId,
-          playerName: pName,
-          payload: { initialState },
-        })
-      );
-    };
-
-    ws.onmessage = event => {
-      try {
-        const data = JSON.parse(event.data);
-        if (data.type === 'room_joined') {
-          if (data.gameState) {
-            setGameState(data.gameState);
-            setInGame(true);
-          }
-        } else if (data.type === 'game_state_updated') {
-          setGameState(data.gameState);
-          if (data.action) addLog(data.action);
-        }
-      } catch (err) {
-        console.error('Failed to parse WS message:', err);
-      }
-    };
-
-    ws.onerror = (err) => {
-      setIsConnecting(false);
-      setIsOnline(false);
-      console.warn('WebSocket connection not available:', err);
-      if (window.location.hostname.endsWith('github.io')) {
-        alert(
-          'GitHub Pages — це статичний хостинг (без бекенд-сервера для онлайн-кімнат). Режими «Соло проти бота/поліції» та «Локальна гра на одному екрані» працюють повністю автономно!'
-        );
-      } else {
-        alert('Не вдалося підключитися до онлайн-сервера.');
-      }
-    };
-
-    ws.onclose = () => {
-      setIsConnecting(false);
-    };
-  };
-
   const broadcastState = (newState: GameState, actionText?: string) => {
-    setGameState(newState);
-    if (actionText) addLog(actionText);
-
-    if (isOnline && wsRef.current && wsRef.current.readyState === WebSocket.OPEN && roomCode) {
-      wsRef.current.send(
-        JSON.stringify({
-          type: 'sync_game_state',
-          roomId: roomCode,
-          playerId: currentPlayerId,
-          payload: { gameState: newState, action: actionText },
-        })
-      );
+    if (actionText) {
+      const updatedLog = [
+        {
+          id: makeLogId('action'),
+          round: newState.round,
+          timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
+          text: actionText,
+          type: 'info' as const,
+        },
+        ...newState.log,
+      ];
+      setGameState({ ...newState, log: updatedLog });
+    } else {
+      setGameState(newState);
     }
   };
 
@@ -219,7 +148,6 @@ export default function App() {
     setGameState(initial);
     setCurrentPlayerId(initial.players[0].id);
     setViewingPlayerId(initial.players[0].id);
-    setIsOnline(false);
     setInGame(true);
     addLog(`Гру розпочато! Бос раунду 1: ${initial.players[0].name}`);
   };
@@ -230,9 +158,8 @@ export default function App() {
     setGameState(initial);
     setCurrentPlayerId(initial.players[0].id);
     setViewingPlayerId(initial.players[0].id);
-    setIsOnline(false);
     setInGame(true);
-    addLog(`Розпочато офіційне соло-випробування! Поліція стартує на 6 клітинці.`);
+    addLog(`Розпочато офіційне соло-випробування! Поліція стартує на 3 клітинці.`);
   };
 
   const startPassAndPlay = (names: string[], colors: PlayerColor[]) => {
@@ -245,31 +172,8 @@ export default function App() {
     setGameState(initial);
     setCurrentPlayerId(initial.players[0].id);
     setViewingPlayerId(initial.players[0].id);
-    setIsOnline(false);
     setInGame(true);
     addLog(`Розпочато гру на одному екрані для ${players.length} гравців.`);
-  };
-
-  const createOnlineRoom = (playerName: string, playerColor: PlayerColor) => {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let code = '';
-    for (let i = 0; i < 4; i++) {
-      code += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    const players = [{ name: playerName, color: playerColor, isBot: false }];
-    const initial = createInitialGameState('standard', players);
-    setCurrentPlayerId(initial.players[0].id);
-    setViewingPlayerId(initial.players[0].id);
-    setGameState(initial);
-    connectWebSocket(code, initial.players[0].id, playerName, initial);
-    setInGame(true);
-    addLog(`Кімнату створено з кодом ${code}. Запросіть друзів!`);
-  };
-
-  const joinOnlineRoom = (roomCodeInput: string, playerName: string, playerColor: PlayerColor) => {
-    const tempId = `player_${Math.random().toString(36).substr(2, 6)}`;
-    setCurrentPlayerId(tempId);
-    connectWebSocket(roomCodeInput.toUpperCase(), tempId, playerName);
   };
 
   // -------------------------------------------------------------
@@ -420,7 +324,7 @@ export default function App() {
     }
 
     const newLogEntries = bonusLogs.map(text => ({
-      id: `log_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+      id: makeLogId('heist_bonus'),
       round: gameState.round,
       timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
       text,
@@ -431,7 +335,7 @@ export default function App() {
 
     if (hasReachedSixHeists) {
       newLogEntries.unshift({
-        id: `log_${Date.now()}_six_heists`,
+        id: makeLogId('six_heists'),
         round: gameState.round,
         timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
         text: `🏆 ${updatedPlayer.name} виконав 6 із 6 пограбувань! План банди повністю виконано! Запущено фінальний раунд!`,
@@ -503,17 +407,6 @@ export default function App() {
         playerActions: updatedPlayerActions,
         phase: nextPhase,
       };
-
-      if (isOnline && wsRef.current && wsRef.current.readyState === WebSocket.OPEN && roomCode) {
-        wsRef.current.send(
-          JSON.stringify({
-            type: 'sync_game_state',
-            roomId: roomCode,
-            playerId: currentPlayerId,
-            payload: { gameState: finalState },
-          })
-        );
-      }
 
       return finalState;
     });
@@ -595,10 +488,6 @@ export default function App() {
   const handleRestart = () => {
     setInGame(false);
     setGameState(null);
-    if (wsRef.current) {
-      wsRef.current.close();
-      wsRef.current = null;
-    }
   };
 
   // -------------------------------------------------------------
@@ -672,12 +561,9 @@ export default function App() {
           onStartVsAI={startVsAI}
           onStartSoloChallenge={startSoloChallenge}
           onStartPassAndPlay={startPassAndPlay}
-          onCreateOnlineRoom={createOnlineRoom}
-          onJoinOnlineRoom={joinOnlineRoom}
           onOpenRules={() => setShowRulesModal(true)}
           isMuted={isMuted}
           onToggleMute={handleToggleMute}
-          isConnecting={isConnecting}
         />
         <RulesModal isOpen={showRulesModal} onClose={() => setShowRulesModal(false)} />
       </>
@@ -712,26 +598,6 @@ export default function App() {
             </div>
           </div>
         </div>
-
-        {/* Online Room Info Pill if active */}
-        {isOnline && roomCode && (
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs">
-            <span className="text-slate-400">Код кімнати:</span>
-            <span className="font-mono font-bold text-amber-300 tracking-wider">{roomCode}</span>
-            <button
-              type="button"
-              onClick={() => {
-                navigator.clipboard.writeText(roomCode);
-                setCopiedCode(true);
-                setTimeout(() => setCopiedCode(false), 2000);
-              }}
-              className="p-1 text-slate-400 hover:text-white cursor-pointer"
-              title="Скопіювати код кімнати"
-            >
-              {copiedCode ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-            </button>
-          </div>
-        )}
 
         {/* Player Gang Board Selector */}
         <div className="flex items-center gap-2">
@@ -808,6 +674,7 @@ export default function App() {
           players={gameState.players}
           policePosition={gameState.policeCarPosition}
           currentPlayerId={currentPlayerId}
+          gameMode={gameState.gameMode}
         />
 
         {/* Gang Board (Shows currently selected player's gang) */}
@@ -870,21 +737,8 @@ export default function App() {
           />
         )}
 
-        {/* Recent Game Activity Logs */}
-        <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-3 text-xs">
-          <div className="font-bold text-slate-400 mb-1.5 flex items-center gap-1.5">
-            <ScrollText className="w-3.5 h-3.5" />
-            <span>Хроніка подій пограбування:</span>
-          </div>
-          <div className="max-h-24 overflow-y-auto space-y-1 font-mono text-[11px] text-slate-300">
-            {eventLogs.map(log => (
-              <div key={log.id} className="flex items-center gap-2">
-                <span className="text-slate-500 text-[10px]">{log.time}</span>
-                <span>{log.text}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Chronicle / Activity Logs */}
+        <EventLog log={gameState?.log || []} />
       </main>
 
       {/* Manual Symbol Allocation Modal (gloves, masks, locks, flashlights) */}

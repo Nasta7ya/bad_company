@@ -21,6 +21,12 @@ import {
   UpgradeCard,
 } from '../types/game';
 
+let _uniqueLogCounter = 0;
+export const makeLogId = (prefix = 'log'): string => {
+  _uniqueLogCounter += 1;
+  return `${prefix}_${Date.now()}_${_uniqueLogCounter}_${Math.random().toString(36).substring(2, 7)}`;
+};
+
 export function createNewGame(
   playerConfigs: { name: string; isBot: boolean; color: 'red' | 'blue' | 'yellow' | 'green' }[],
   gameMode: 'solo_bot' | 'solo_police' | 'local_multiplayer' | 'online_multiplayer',
@@ -65,12 +71,9 @@ export function createNewGame(
   });
 
   // Police car starting position:
-  // In solo challenge vs police: space 6!
-  // In 2-4 players: space equals player count (e.g. 2 for 2p, 3 for 3p, 4 for 4p)
-  let policeStart = players.length;
-  if (gameMode === 'solo_police') {
-    policeStart = 6;
-  } else if (players.length === 1) {
+  // -2 if 2 players, -3 if 3 players, -4 if 4 players (or 3 in solo challenge)
+  let policeStart = -players.length;
+  if (gameMode === 'solo_police' || (gameMode as string) === 'solo_challenge') {
     policeStart = 3;
   }
 
@@ -121,13 +124,13 @@ export function rollAllDice(state: GameState): GameState {
     Math.floor(Math.random() * 6) + 1,
     Math.floor(Math.random() * 6) + 1,
   ];
-  // Police die: 0, 1, 1, 2, 2, 3
-  const policeRolls = [0, 1, 1, 2, 2, 3];
+  // Police die: 0, 0, 1, 1, 2, 2
+  const policeRolls = [0, 0, 1, 1, 2, 2];
   const policeDie = policeRolls[Math.floor(Math.random() * policeRolls.length)];
 
   const boss = state.players[state.bossPlayerIndex];
   const logEntry: GameLogEntry = {
-    id: `log_${Date.now()}`,
+    id: makeLogId('roll'),
     round: state.round,
     timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
     text: `${boss.name} (Бос) кидає кубики: [${goldDice.join(', ')}] та поліцейський: [${policeDie}]`,
@@ -163,7 +166,7 @@ export function rerollSelectedDice(
 
   let newPolice = state.policeDie;
   if (rerollPolice) {
-    const policeRolls = [0, 1, 1, 2, 2, 3];
+    const policeRolls = [0, 0, 1, 1, 2, 2];
     newPolice = policeRolls[Math.floor(Math.random() * policeRolls.length)];
   }
 
@@ -172,7 +175,7 @@ export function rerollSelectedDice(
   );
 
   const logEntry: GameLogEntry = {
-    id: `log_${Date.now()}`,
+    id: makeLogId('reroll'),
     round: state.round,
     timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
     text: `${boss.name} сплатив $1 та перекинув кубики! Нові: [${newGoldDice.join(', ')}] та поліція: [${newPolice}]`,
@@ -207,7 +210,7 @@ export function setBossPairing(
 
   const boss = state.players[state.bossPlayerIndex];
   const logEntry: GameLogEntry = {
-    id: `log_${Date.now()}`,
+    id: makeLogId('pairing'),
     round: state.round,
     timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
     text: `${boss.name} об'єднав кубики у пари: [${sumA}] та [${sumB}]. Усі гравці активують своїх грабіжників!`,
@@ -332,7 +335,7 @@ export function chooseReplacementHeist(
   const updatedPlayers = state.players.map((p, i) => (i === pIdx ? updatedPlayer : p));
   const newLog: GameLogEntry[] = [
     {
-      id: `log_${Date.now()}_heist_pick`,
+      id: makeLogId('heist_pick'),
       round: state.round,
       timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
       text: `${player.name} обрав нову справу: «${cardToAdd.title}» (${cardToAdd.vp} ПО, трофей: ${cardToAdd.trophy})`,
@@ -377,7 +380,7 @@ export function activatePlayerGang(
   if (slot.assignedNecklace) {
     newPlayer.score += 1;
     newLog.unshift({
-      id: `log_${Date.now()}_neck`,
+      id: makeLogId('neck'),
       round: state.round,
       timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
       text: `${newPlayer.name} активував грабіжника #${chosenSum} з кольє і отримує +1 ПО!`,
@@ -412,7 +415,7 @@ export function activatePlayerGang(
     }
 
     newLog.unshift({
-      id: `log_${Date.now()}_fix`,
+      id: makeLogId('fix'),
       round: state.round,
       timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
       text: `${newPlayer.name} активував Навідника (#2): обрано символ [${choice}], отримано ${count} маркерів!`,
@@ -444,7 +447,7 @@ export function activatePlayerGang(
           newLootDeck = newLootDeck.slice(1);
           newPlayer.lootCards = [...newPlayer.lootCards, drawn];
           newLog.unshift({
-            id: `log_${Date.now()}_loot`,
+            id: makeLogId('loot'),
             round: state.round,
             timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
             text: `${newPlayer.name} виконав завдання під #12 і отримав карту здобичі: «${drawn.title}»!`,
@@ -480,7 +483,7 @@ export function activatePlayerGang(
             newPlayer.lootCards = [...newPlayer.lootCards, drawn];
           }
           newLog.unshift({
-            id: `log_${Date.now()}_cp`,
+            id: makeLogId('checkpoint'),
             round: state.round,
             timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
             text: `${newPlayer.name} проїхав чекпоінт «${checkInfo.name}» попереду поліції! Бонус: ${checkInfo.bonusDesc}`,
@@ -725,7 +728,7 @@ export function checkHeistCompletions(
       }
 
       logs.push({
-        id: `log_${Date.now()}_heist_${heist.id}`,
+        id: makeLogId(`heist_${heist.id}`),
         round: 0,
         timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
         text: `💥 ${newPlayer.name} успішно здійснив пограбування: «${heist.title}»! (+${heist.vp} ПО, трофей: ${heist.trophy})`,
@@ -811,6 +814,16 @@ export function applyRecruitUpgrade(
   // Place upgrade on gang member slot
   const gangNum = chosenCard.gangNumber;
   const existingSlot = player.gangBoard[gangNum];
+
+  // If slot already had upgrades, only the top (last added) card's VP was counted.
+  // We replace the previous top card's VP bonus with the new card's VP bonus.
+  const prevTopCard = existingSlot.upgrades.length > 0
+    ? existingSlot.upgrades[existingSlot.upgrades.length - 1]
+    : null;
+  const prevVp = prevTopCard?.vpBonus || 0;
+  const newVp = chosenCard.vpBonus || 0;
+  newScore = newScore - prevVp + newVp;
+
   const updatedSlot = {
     ...existingSlot,
     upgrades: [...existingSlot.upgrades, chosenCard],
@@ -820,11 +833,6 @@ export function applyRecruitUpgrade(
     ...player.gangBoard,
     [gangNum]: updatedSlot,
   };
-
-  // Add card VP bonus if any
-  if (chosenCard.vpBonus) {
-    newScore += chosenCard.vpBonus;
-  }
 
   const updatedPlayer: PlayerState = {
     ...player,
@@ -837,10 +845,10 @@ export function applyRecruitUpgrade(
   const updatedPlayers = state.players.map((p, i) => (i === pIdx ? updatedPlayer : p));
 
   const logEntry: GameLogEntry = {
-    id: `log_${Date.now()}_recruit`,
+    id: makeLogId('recruit'),
     round: state.round,
     timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
-    text: `${player.name} завербував оновлення «${chosenCard.name}» для грабіжника #${gangNum}! (Витрачено $${cost})`,
+    text: `${player.name} завербував оновлення «${chosenCard.name}» для грабіжника #${gangNum}! (Витрачено $${cost}${chosenCard.vpBonus ? `, +${chosenCard.vpBonus} ПО` : ''})`,
     type: 'recruit',
     playerName: player.name,
     playerColor: player.color,
@@ -879,7 +887,7 @@ export function useLootCard(state: GameState, playerId: string, cardId: string):
   newPlayer.lootCards = updatedLootCards;
 
   const logEntry: GameLogEntry = {
-    id: `log_${Date.now()}_loot_use`,
+    id: makeLogId('loot_use'),
     round: state.round,
     timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
     text: `${player.name} використав карту здобичі: «${card.title}» (${card.description})`,
@@ -902,11 +910,12 @@ export function endBossTurn(state: GameState): GameState {
 
   // 1. Move police car:
   // In solo challenge vs police: moves policeDie + 1
-  const policeMove = state.gameMode === 'solo_police' ? state.policeDie + 1 : state.policeDie;
+  const isSoloChallenge = state.gameMode === 'solo_police' || (state.gameMode as string) === 'solo_challenge';
+  const policeMove = isSoloChallenge ? state.policeDie + 1 : state.policeDie;
   const newPolicePos = Math.min(CITY_TRACK_LENGTH - 1, state.policeCarPosition + policeMove);
 
   newLog.unshift({
-    id: `log_${Date.now()}_police`,
+    id: makeLogId('police'),
     round: state.round,
     timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
     text: `🚓 Поліцейське авто рухається на ${policeMove} кроків вперед! (Поточна позиція: ${newPolicePos})`,
@@ -930,7 +939,7 @@ export function endBossTurn(state: GameState): GameState {
     const topCount = counts[0].count;
 
     // Must have at least 1 trophy to hold a necklace (or in solo police mode, at least 3)
-    const threshold = state.gameMode === 'solo_police' ? 3 : 1;
+    const threshold = isSoloChallenge ? 3 : 1;
 
     if (topCount >= threshold) {
       // Check if unique leader
@@ -988,7 +997,7 @@ export function endBossTurn(state: GameState): GameState {
           };
 
           newLog.unshift({
-            id: `log_${Date.now()}_neck_${trophy}`,
+            id: makeLogId(`neck_${trophy}`),
             round: state.round,
             timestamp: new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
             text: `👑 ${leaderPlayer.name} здобув кольє «${trophyNameUk(trophy)}» і поклав його на грабіжника #${bestGangNum}! (+1 ПО)`,
@@ -1025,7 +1034,7 @@ export function endBossTurn(state: GameState): GameState {
   }
 
   // In Solo Police Challenge: immediate loss if police catches or passes player car
-  if (state.gameMode === 'solo_police') {
+  if (isSoloChallenge) {
     const player = updatedPlayers[0];
     if (newPolicePos >= player.carPosition) {
       // Captured by police!
@@ -1088,23 +1097,56 @@ function trophyNameUk(t: MissionTrophy): string {
 // Calculate final scores and rankings
 export function calculateFinalScores(state: GameState): GameState {
   const scoredPlayers = state.players.map(player => {
-    let finalScore = player.score;
+    let finalScore = 0;
 
-    // 1. Endgame VP from Loot Cards
+    // 1. Completed Heists VP
+    for (const h of player.completedHeists) {
+      finalScore += h.vp;
+    }
+
+    // 2. Gang Board Upgrades VP: ONLY the LAST (top) upgrade card on each slot gives VP!
+    for (let n = 2; n <= 12; n++) {
+      const slot = player.gangBoard[n];
+      if (slot && slot.upgrades && slot.upgrades.length > 0) {
+        const topCard = slot.upgrades[slot.upgrades.length - 1];
+        if (topCard && topCard.vpBonus) {
+          finalScore += topCard.vpBonus;
+        }
+      }
+    }
+
+    // 3. Recruiter Meeple End-of-Track Bonus VP (any bonus VP earned)
+    if (player.bonusVp) {
+      finalScore += player.bonusVp;
+    }
+
+    // 4. In-game necklace trigger points that were already accumulated
+    // (Notice: claiming necklace +1 and activating robber with necklace +1 are live bonuses)
+    // To preserve these earned in-game points while ensuring gang cards are recalculated strictly:
+    // Let's compute base live points = (player.score - previous gang cards VP)
+    // Or simpler: player.score during game already tracked:
+    // + heists VP
+    // + live necklace activations (+1 on claim, +1 on roll)
+    // + recruiter end-of-track bonus
+    // + top upgrade cards VP (which we accurately maintain on recruitment).
+    // Let's take player.score as base:
+    finalScore = player.score;
+
+    // 5. Endgame VP from Loot Cards
     for (const loot of player.lootCards) {
       if (loot.type === 'endgame_vp' && loot.vp) {
         finalScore += loot.vp;
       }
     }
 
-    // 2. End of game Necklaces: +2 VP per necklace held
-    for (const [trophy, info] of Object.entries(state.necklaces)) {
+    // 6. End of game Necklaces: +2 VP per necklace held at game end
+    for (const [, info] of Object.entries(state.necklaces)) {
       if (info.holderPlayerId === player.id) {
         finalScore += 2;
       }
     }
 
-    // 3. Uncompleted markers on active heists and tasks: 1 VP per 2 markers
+    // 7. Leftover markers on active heists and tasks: 1 VP per 2 markers
     let leftoverMarkers = player.wildMarkers;
     for (const heist of player.activeHeists) {
       leftoverMarkers += heist.placedMarkers.length;
@@ -1116,7 +1158,7 @@ export function calculateFinalScores(state: GameState): GameState {
 
     finalScore += Math.floor(leftoverMarkers / 2);
 
-    // 4. Police penalty: -3 VP if car is behind police car!
+    // 8. Police penalty: -3 VP if car is behind police car!
     if (player.carPosition < state.policeCarPosition) {
       finalScore -= 3;
     }
@@ -1127,9 +1169,23 @@ export function calculateFinalScores(state: GameState): GameState {
     };
   });
 
+  // Calculate final rankings
+  const sorted = [...scoredPlayers].sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return b.coins - a.coins;
+  });
+
+  const finalRankings = sorted.map((p, idx) => ({
+    playerId: p.id,
+    name: p.name,
+    score: p.score,
+    rank: idx + 1,
+  }));
+
   return {
     ...state,
     players: scoredPlayers,
+    finalRankings,
     phase: 'game_over',
   };
 }

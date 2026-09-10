@@ -86,7 +86,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Спритні пальці',
       avatar: '🧤',
       quote: '«Що в кишені — те моє»',
-      baseSymbols: ['glove', 'coin'],
+      baseSymbols: ['glove'],
     },
     {
       number: 3,
@@ -94,7 +94,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Стрибки по дахах',
       avatar: '🧗',
       quote: '«Гравітація мені не указ»',
-      baseSymbols: ['glove', 'wheel'],
+      baseSymbols: ['glove'],
     },
     {
       number: 3,
@@ -102,7 +102,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Відволікаючий маневр',
       avatar: '🎩',
       quote: '«Слідкуйте за руками!»',
-      baseSymbols: ['mask', 'glove'],
+      baseSymbols: ['mask'],
     },
     {
       number: 3,
@@ -110,7 +110,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Таємні сигнали',
       avatar: '📱',
       quote: '«Товар уже передано в надійні руки»',
-      baseSymbols: ['lock', 'glove'],
+      baseSymbols: ['lock'],
     },
     {
       number: 3,
@@ -118,7 +118,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Вулична спритність',
       avatar: '🎲',
       quote: '«Готівка сама липне до рук»',
-      baseSymbols: ['coin', 'glove'],
+      baseSymbols: ['coin'],
     },
     {
       number: 3,
@@ -126,7 +126,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Швидка доставка',
       avatar: '🎒',
       quote: '«Ніхто не помітить мого проходу»',
-      baseSymbols: ['flashlight', 'glove'],
+      baseSymbols: ['flashlight'],
     },
   ],
   4: [
@@ -136,7 +136,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Електронні системи',
       avatar: '💻',
       quote: '«Камери вимкнено, доступ надано»',
-      baseSymbols: ['mask', 'wheel'],
+      baseSymbols: ['mask'],
     },
     {
       number: 4,
@@ -144,7 +144,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Злом кодових замків',
       avatar: '🔑',
       quote: '«Шифр розгадано за лічені секунди»',
-      baseSymbols: ['lock', 'mask'],
+      baseSymbols: ['lock'],
     },
     {
       number: 4,
@@ -152,7 +152,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Підробка перепусток',
       avatar: '📜',
       quote: '«Печатка чистіша за оригінал»',
-      baseSymbols: ['mask', 'coin'],
+      baseSymbols: ['mask'],
     },
     {
       number: 4,
@@ -160,7 +160,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Повітряне спостереження',
       avatar: '🛸',
       quote: '«Периметр проскановано з повітря»',
-      baseSymbols: ['flashlight', 'mask'],
+      baseSymbols: ['flashlight'],
     },
     {
       number: 4,
@@ -168,7 +168,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Форсування двигунів',
       avatar: '🔧',
       quote: '«Турбіни готові до шаленого старту»',
-      baseSymbols: ['wheel', 'glove'],
+      baseSymbols: ['wheel'],
     },
     {
       number: 4,
@@ -176,7 +176,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Пошук секретних кімнат',
       avatar: '🔍',
       quote: '«Фальшива стіна мене не обдурить»',
-      baseSymbols: ['mask', 'flashlight'],
+      baseSymbols: ['mask'],
     },
   ],
   5: [
@@ -186,7 +186,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Злом важких сейфів',
       avatar: '🔦',
       quote: '«Сейфи самі відкриваються»',
-      baseSymbols: ['flashlight', 'glove'],
+      baseSymbols: ['flashlight'],
     },
     {
       number: 5,
@@ -194,7 +194,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Пропалювання сталі',
       avatar: '🔥',
       quote: '«Броньований лист плавиться як віск»',
-      baseSymbols: ['flashlight', 'lock'],
+      baseSymbols: ['flashlight'],
     },
     {
       number: 5,
@@ -202,7 +202,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Спрямований підрив',
       avatar: '🧨',
       quote: '«Точковий хлопок — і вхід вільний»',
-      baseSymbols: ['lock', 'wheel'],
+      baseSymbols: ['lock'],
     },
     {
       number: 5,
@@ -210,7 +210,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Підземні комунікації',
       avatar: '🧭',
       quote: '«Знаю кожен колектор міста»',
-      baseSymbols: ['flashlight', 'mask'],
+      baseSymbols: ['flashlight'],
     },
     {
       number: 5,
@@ -218,7 +218,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Оптичні пастки',
       avatar: '🥽',
       quote: '«Бачу невидимі промені сигналізації»',
-      baseSymbols: ['flashlight', 'coin'],
+      baseSymbols: ['flashlight'],
     },
     {
       number: 5,
@@ -226,7 +226,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Плутанина в рахунках',
       avatar: '💼',
       quote: '«Активи переведено куди слід»',
-      baseSymbols: ['flashlight', 'glove'],
+      baseSymbols: ['coin'],
     },
   ],
   6: [
@@ -236,7 +236,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Конспірація та грим',
       avatar: '🎭',
       quote: '«Мене тут ніколи не бачили»',
-      baseSymbols: ['mask', 'mask'],
+      baseSymbols: ['mask'],
     },
     {
       number: 6,
@@ -244,7 +244,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Світський камуфляж',
       avatar: '💃',
       quote: '«Уся увага охорони на моїй сукні»',
-      baseSymbols: ['mask', 'glove'],
+      baseSymbols: ['mask'],
     },
     {
       number: 6,
@@ -252,7 +252,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Зміна зовнішності',
       avatar: '🎨',
       quote: '«Новий вигляд за кілька мазків»',
-      baseSymbols: ['mask', 'flashlight'],
+      baseSymbols: ['mask'],
     },
     {
       number: 6,
@@ -260,7 +260,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Невидима присутність',
       avatar: '👤',
       quote: '«Зникаю ще до того, як помітять»',
-      baseSymbols: ['mask', 'lock'],
+      baseSymbols: ['mask'],
     },
     {
       number: 6,
@@ -268,7 +268,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Переговори без шуму',
       avatar: '👔',
       quote: '«Гроші вирішують будь-який конфлікт»',
-      baseSymbols: ['mask', 'coin'],
+      baseSymbols: ['coin'],
     },
     {
       number: 6,
@@ -276,7 +276,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Димова завіса',
       avatar: '🃏',
       quote: '«Магія чистої води»',
-      baseSymbols: ['mask', 'wheel'],
+      baseSymbols: ['mask'],
     },
   ],
   7: [
@@ -286,7 +286,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Важка робота',
       avatar: '🥊',
       quote: '«Двері вилітають разом із коробкою»',
-      baseSymbols: ['lock', 'glove'],
+      baseSymbols: ['lock'],
     },
     {
       number: 7,
@@ -294,7 +294,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Прорив охорони',
       avatar: '🛡️',
       quote: '«Ніхто не втримає цей натиск»',
-      baseSymbols: ['lock', 'mask'],
+      baseSymbols: ['lock'],
     },
     {
       number: 7,
@@ -302,7 +302,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Трощення броні',
       avatar: '🔨',
       quote: '«Один точний удар важким молотом»',
-      baseSymbols: ['lock', 'lock'],
+      baseSymbols: ['lock'],
     },
     {
       number: 7,
@@ -310,7 +310,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Рукопашний контакт',
       avatar: '🤼',
       quote: '«Охоронці сплять міцним сном»',
-      baseSymbols: ['glove', 'glove'],
+      baseSymbols: ['glove'],
     },
     {
       number: 7,
@@ -318,7 +318,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Контроль периметра',
       avatar: '🔦',
       quote: '«Вхід під пильним наглядом»',
-      baseSymbols: ['flashlight', 'lock'],
+      baseSymbols: ['flashlight'],
     },
     {
       number: 7,
@@ -326,7 +326,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Зривання ґрат',
       avatar: '🔩',
       quote: '«Титановий лом не знає перешкод»',
-      baseSymbols: ['lock', 'wheel'],
+      baseSymbols: ['lock'],
     },
   ],
   8: [
@@ -336,7 +336,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Спостереження в темряві',
       avatar: '🥽',
       quote: '«Бачу все крізь найтемнішу ніч»',
-      baseSymbols: ['mask', 'flashlight'],
+      baseSymbols: ['flashlight'],
     },
     {
       number: 8,
@@ -344,7 +344,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Далека оптика',
       avatar: '🔭',
       quote: '«Патруль ще за три квартали»',
-      baseSymbols: ['flashlight', 'flashlight'],
+      baseSymbols: ['flashlight'],
     },
     {
       number: 8,
@@ -352,7 +352,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Шахти повітроводів',
       avatar: '🦇',
       quote: '«Прослизну крізь найвужчу щілину»',
-      baseSymbols: ['flashlight', 'glove'],
+      baseSymbols: ['flashlight'],
     },
     {
       number: 8,
@@ -360,7 +360,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Слухач сигналізацій',
       avatar: '🎛️',
       quote: '«Чую клацання кожного реле»',
-      baseSymbols: ['flashlight', 'lock'],
+      baseSymbols: ['flashlight'],
     },
     {
       number: 8,
@@ -368,7 +368,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Безшумний маршрут',
       avatar: '🐾',
       quote: '«Жодного звуку, жодного сліду»',
-      baseSymbols: ['flashlight', 'wheel'],
+      baseSymbols: ['flashlight'],
     },
     {
       number: 8,
@@ -376,7 +376,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Оцінка дорогоцінностей',
       avatar: '💎',
       quote: '«Діаманти видно здалеку»',
-      baseSymbols: ['flashlight', 'coin'],
+      baseSymbols: ['coin'],
     },
   ],
   9: [
@@ -386,7 +386,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Швидке проникнення',
       avatar: '🗝️',
       quote: '«Будь-який шифр за лічені секунди»',
-      baseSymbols: ['lock', 'lock'],
+      baseSymbols: ['lock'],
     },
     {
       number: 9,
@@ -394,7 +394,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Точний розпил металу',
       avatar: '🔬',
       quote: '«Ідеальний розпил без зайвого шуму»',
-      baseSymbols: ['lock', 'flashlight'],
+      baseSymbols: ['lock'],
     },
     {
       number: 9,
@@ -402,7 +402,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Пресове обладнання',
       avatar: '🦾',
       quote: '«Зігне найтовстіші сталеві балки»',
-      baseSymbols: ['lock', 'glove'],
+      baseSymbols: ['lock'],
     },
     {
       number: 9,
@@ -410,7 +410,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Механічні циферблати',
       avatar: '⚙️',
       quote: '«Клацання барабана — найкраща мелодія»',
-      baseSymbols: ['lock', 'coin'],
+      baseSymbols: ['lock'],
     },
     {
       number: 9,
@@ -418,7 +418,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Різання арматури',
       avatar: '👨‍🏭',
       quote: '«Зрізаємо решітку на даху»',
-      baseSymbols: ['lock', 'mask'],
+      baseSymbols: ['lock'],
     },
     {
       number: 9,
@@ -426,7 +426,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Миттєве відчинення',
       avatar: '🏎️',
       quote: '«Зламали замок — і газуємо!»',
-      baseSymbols: ['lock', 'wheel'],
+      baseSymbols: ['wheel'],
     },
   ],
   10: [
@@ -436,7 +436,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Маршрути відходу',
       avatar: '🚤',
       quote: '«Чистий фарватер без застав»',
-      baseSymbols: ['flashlight', 'wheel'],
+      baseSymbols: ['wheel'],
     },
     {
       number: 10,
@@ -444,7 +444,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Водні переправи',
       avatar: '⚓',
       quote: '«Через затоку за три хвилини»',
-      baseSymbols: ['wheel', 'mask'],
+      baseSymbols: ['wheel'],
     },
     {
       number: 10,
@@ -452,7 +452,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Таємні вантажні траси',
       avatar: '📦',
       quote: '«Вантаж сховаємо надійно»',
-      baseSymbols: ['flashlight', 'coin'],
+      baseSymbols: ['wheel'],
     },
     {
       number: 10,
@@ -460,7 +460,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Зелені коридори',
       avatar: '🚦',
       quote: '«Поліцейські екіпажі зав\'язнуть у заторах»',
-      baseSymbols: ['wheel', 'lock'],
+      baseSymbols: ['wheel'],
     },
     {
       number: 10,
@@ -468,7 +468,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Гонки без гальм',
       avatar: '🏎️',
       quote: '«Обженемо будь-яку мигалку»',
-      baseSymbols: ['wheel', 'wheel'],
+      baseSymbols: ['wheel'],
     },
     {
       number: 10,
@@ -476,7 +476,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Маневри між рядами',
       avatar: '🏍️',
       quote: '«Вузькими провулками на повній швидкості»',
-      baseSymbols: ['wheel', 'glove'],
+      baseSymbols: ['wheel'],
     },
   ],
   11: [
@@ -486,7 +486,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Зв\'язки з чорним ринком',
       avatar: '🕶️',
       quote: '«Зв’язки на найвищому рівні»',
-      baseSymbols: ['glove', 'glove'],
+      baseSymbols: ['glove'],
     },
     {
       number: 11,
@@ -494,7 +494,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Конвертація здобичі',
       avatar: '💰',
       quote: '«Золото і кеш завжди в пошані»',
-      baseSymbols: ['glove', 'coin'],
+      baseSymbols: ['coin'],
     },
     {
       number: 11,
@@ -502,7 +502,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Вищий ґатунок каменів',
       avatar: '💍',
       quote: '«Тільки чисті карати»',
-      baseSymbols: ['glove', 'mask'],
+      baseSymbols: ['glove'],
     },
     {
       number: 11,
@@ -510,7 +510,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Оцінка старожитностей',
       avatar: '🏺',
       quote: '«Цим реліквіям немає ціни»',
-      baseSymbols: ['glove', 'flashlight'],
+      baseSymbols: ['glove'],
     },
     {
       number: 11,
@@ -518,7 +518,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Блискавичне викрадення',
       avatar: '🏃',
       quote: '«Взяв здобич і розтанув у натовпі»',
-      baseSymbols: ['glove', 'wheel'],
+      baseSymbols: ['glove'],
     },
     {
       number: 11,
@@ -526,7 +526,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Переплавка злитків',
       avatar: '👑',
       quote: '«Чисте золото не залишає відбитків»',
-      baseSymbols: ['glove', 'lock'],
+      baseSymbols: ['glove'],
     },
   ],
   12: [
@@ -560,7 +560,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Неймовірні маневри',
       avatar: '🏍️',
       quote: '«Стрибок через розведений міст!»',
-      baseSymbols: ['wheel', 'coin'],
+      baseSymbols: ['wheel', 'wheel'],
     },
     {
       number: 12,
@@ -576,7 +576,7 @@ export const GANG_MEMBER_POOLS: Record<number, GangMemberTemplate[]> = {
       role: 'Пробиття кордонів',
       avatar: '🚛',
       quote: '«Зметемо будь-який блокпост на шляху»',
-      baseSymbols: ['wheel', 'lock'],
+      baseSymbols: ['wheel', 'wheel'],
     },
   ],
 };
@@ -618,35 +618,86 @@ export function createInitialGangBoard(randomize = true): Record<number, GangMem
 }
 
 export const INITIAL_UPGRADE_CARDS: UpgradeCard[] = [
-  // Upgrades for 2..12
-  { id: 'u_2_1', gangNumber: 2, name: 'Інформатор поліції', symbols: ['mask', 'coin'], vpBonus: 1, flavor: 'Зливає плани патрулів', avatarIcon: '🕵️‍♂️' },
-  { id: 'u_2_2', gangNumber: 2, name: 'Диспетчер рацій', symbols: ['lock', 'wheel'], vpBonus: 0, flavor: 'Перехоплює поліцейські хвилі', avatarIcon: '📻' },
-  { id: 'u_3_1', gangNumber: 3, name: 'Ловкач із ринку', symbols: ['glove', 'glove'], vpBonus: 0, flavor: 'Очищає кишені перехожих', avatarIcon: '🧤' },
-  { id: 'u_3_2', gangNumber: 3, name: 'Скупник краденого', symbols: ['coin', 'coin'], vpBonus: 1, flavor: 'Швидко перетворює товар на кеш', avatarIcon: '💰' },
-  { id: 'u_4_1', gangNumber: 4, name: 'Кібер-фантом', symbols: ['mask', 'lock'], vpBonus: 1, flavor: 'Відключає камери спостереження', avatarIcon: '💻' },
-  { id: 'u_4_2', gangNumber: 4, name: 'Тюнінг-майстер', symbols: ['wheel', 'wheel'], vpBonus: 0, flavor: 'Прокачує турбіни для погоні', avatarIcon: '🚗' },
-  { id: 'u_5_1', gangNumber: 5, name: 'Електродуговик', symbols: ['flashlight', 'lock'], vpBonus: 0, flavor: 'Пропалює броньовані пластини', avatarIcon: '🔦' },
-  { id: 'u_5_2', gangNumber: 5, name: 'Ювелірний крадій', symbols: ['glove', 'coin'], vpBonus: 1, flavor: 'Бере тільки чисті діаманти', avatarIcon: '💎' },
-  { id: 'u_6_1', gangNumber: 6, name: 'Фальшиві документи', symbols: ['mask', 'coin'], vpBonus: 1, flavor: 'Паспорт для будь-якої митниці', avatarIcon: '🎭' },
-  { id: 'u_6_2', gangNumber: 6, name: 'Димова завіса', symbols: ['mask', 'wheel'], vpBonus: 0, flavor: 'Ніхто не помітить зникнення', avatarIcon: '💨' },
-  { id: 'u_7_1', gangNumber: 7, name: 'Гідравлічний лом', symbols: ['lock', 'lock'], vpBonus: 0, flavor: 'Жодні петлі не встоять', avatarIcon: '🔩' },
-  { id: 'u_7_2', gangNumber: 7, name: 'Боксер-важковаговик', symbols: ['glove', 'mask'], vpBonus: 1, flavor: 'Переконливий аргумент у суперечці', avatarIcon: '🥊' },
-  { id: 'u_8_1', gangNumber: 8, name: 'Тепловізор', symbols: ['flashlight', 'mask'], vpBonus: 0, flavor: 'Бачить охоронців крізь стіни', avatarIcon: '🥽' },
-  { id: 'u_8_2', gangNumber: 8, name: 'Шопер на вітрини', symbols: ['flashlight', 'coin'], vpBonus: 1, flavor: 'Знає, де лежить найдорожче', avatarIcon: '🔍' },
-  { id: 'u_9_1', gangNumber: 9, name: 'Лазерний різак', symbols: ['lock', 'coin'], vpBonus: 1, flavor: 'Акуратний отвір у сейфі за 30 секунд', avatarIcon: '⚡' },
-  { id: 'u_9_2', gangNumber: 9, name: 'Стетоскоп зломника', symbols: ['lock', 'wheel'], vpBonus: 0, flavor: 'Чутливий слух до клацання коду', avatarIcon: '🩺' },
-  { id: 'u_10_1', gangNumber: 10, name: 'Катер у гавані', symbols: ['wheel', 'flashlight'], vpBonus: 0, flavor: 'Шлях морем без дорожніх блоків', avatarIcon: '🚤' },
-  { id: 'u_10_2', gangNumber: 10, name: 'Підкуплений митник', symbols: ['flashlight', 'coin'], vpBonus: 1, flavor: 'Зелений коридор для вантажу', avatarIcon: '💵' },
-  { id: 'u_11_1', gangNumber: 11, name: 'Магнітні рукавички', symbols: ['glove', 'lock'], vpBonus: 0, flavor: 'Легке підкорення висоток', avatarIcon: '🧲' },
-  { id: 'u_11_2', gangNumber: 11, name: 'Аукціонний маклер', symbols: ['glove', 'coin'], vpBonus: 2, flavor: 'Продає шедеври приватним колекціонерам', avatarIcon: '🏛️' },
-  { id: 'u_12_1', gangNumber: 12, name: 'Нітро-прискорювач', symbols: ['wheel', 'wheel'], vpBonus: 0, flavor: 'Вмикає закис азоту на повороті', avatarIcon: '🚀' },
-  { id: 'u_12_2', gangNumber: 12, name: 'Штурман-стрітстрайкер', symbols: ['wheel', 'coin'], vpBonus: 1, flavor: 'Знає кожен провулок міста', avatarIcon: '🗺️' },
-  { id: 'u_ext_1', gangNumber: 6, name: 'Театральний гример', symbols: ['mask', 'flashlight'], vpBonus: 1, flavor: 'Повна зміна зовнішності за хвилину', avatarIcon: '🎨' },
-  { id: 'u_ext_2', gangNumber: 7, name: 'Гірський бур', symbols: ['lock', 'wheel'], vpBonus: 0, flavor: 'Прохід підземними тунелями', avatarIcon: '⛏️' },
-  { id: 'u_ext_3', gangNumber: 8, name: 'Нічний дрон', symbols: ['flashlight', 'flashlight'], vpBonus: 0, flavor: 'Повітряна розвідка периметра', avatarIcon: '🛸' },
-  { id: 'u_ext_4', gangNumber: 3, name: 'Кишеньковий циган', symbols: ['glove', 'mask'], vpBonus: 0, flavor: 'Відволікаючий маневр', avatarIcon: '🎩' },
-  { id: 'u_ext_5', gangNumber: 5, name: 'Хімічний розчинник', symbols: ['flashlight', 'coin'], vpBonus: 1, flavor: 'Кислота для титанових засувів', avatarIcon: '🧪' },
-  { id: 'u_ext_6', gangNumber: 10, name: 'Вертолітний майданчик', symbols: ['wheel', 'wheel'], vpBonus: 1, flavor: 'Евакуація з даху хмарочоса', avatarIcon: '🚁' },
+  // --- #3 (Кишенькові злодії, спритники, вуличні тіні) ---
+  { id: 'u_3_1', gangNumber: 3, name: 'Ловкач із ринку', symbols: ['glove'], vpBonus: 0, flavor: 'Очищає кишені перехожих', avatarIcon: '🧤' },
+  { id: 'u_3_2', gangNumber: 3, name: 'Скупник краденого', symbols: ['coin'], vpBonus: 1, flavor: 'Швидко перетворює товар на кеш', avatarIcon: '💰' },
+  { id: 'u_3_3', gangNumber: 3, name: 'Вуличний ілюзіоніст', symbols: ['mask'], vpBonus: 0, flavor: 'Фокус із монетами відволікає патруль', avatarIcon: '🎩' },
+  { id: 'u_3_4', gangNumber: 3, name: 'Швидкий кур\'єр', symbols: ['wheel'], vpBonus: 0, flavor: 'Миттєва передача здобичі', avatarIcon: '🏃' },
+  { id: 'u_3_5', gangNumber: 3, name: 'Дрібний шахрай', symbols: ['coin', 'glove'], vpBonus: 1, flavor: 'Подвійна удача в натовпі', avatarIcon: '🎲' },
+  { id: 'u_3_6', gangNumber: 3, name: 'Карманник-віртуоз', symbols: ['glove'], vpBonus: 2, flavor: 'Ювелірна точність без дотиків', avatarIcon: '✨' },
+  { id: 'u_3_7', gangNumber: 3, name: 'Нічний розвідник', symbols: ['flashlight'], vpBonus: 1, flavor: 'Знає всі темні закутки', avatarIcon: '🔦' },
+
+  // --- #4 (Хакери, ключники, електронщики) ---
+  { id: 'u_4_1', gangNumber: 4, name: 'Кібер-фантом', symbols: ['mask'], vpBonus: 1, flavor: 'Відключає камери спостереження', avatarIcon: '💻' },
+  { id: 'u_4_2', gangNumber: 4, name: 'Тюнінг-майстер', symbols: ['wheel'], vpBonus: 0, flavor: 'Прокачує турбіни для погоні', avatarIcon: '🚗' },
+  { id: 'u_4_3', gangNumber: 4, name: 'Майстер ключів', symbols: ['lock'], vpBonus: 0, flavor: 'Відмикає кодові замки за секунди', avatarIcon: '🔑' },
+  { id: 'u_4_4', gangNumber: 4, name: 'Дроновод-сканер', symbols: ['flashlight'], vpBonus: 0, flavor: 'Повітряний тепловізор периметра', avatarIcon: '🛸' },
+  { id: 'u_4_5', gangNumber: 4, name: 'Шифрувальник синдикату', symbols: ['mask', 'coin'], vpBonus: 1, flavor: 'Крипто-перекази на офшори', avatarIcon: '💳' },
+  { id: 'u_4_6', gangNumber: 4, name: 'Спец з фальшивок', symbols: ['mask'], vpBonus: 2, flavor: 'Дипломатичні паспорти найвищої проби', avatarIcon: '📜' },
+  { id: 'u_4_7', gangNumber: 4, name: 'Інженер турбо-двигунів', symbols: ['wheel', 'lock'], vpBonus: 1, flavor: 'Розгін до максимуму без затримок', avatarIcon: '🏎️' },
+
+  // --- #5 (Ведмежатники, піротехніки, автогени) ---
+  { id: 'u_5_1', gangNumber: 5, name: 'Електродуговик', symbols: ['flashlight'], vpBonus: 0, flavor: 'Пропалює броньовані пластини', avatarIcon: '🔥' },
+  { id: 'u_5_2', gangNumber: 5, name: 'Ювелірний крадій', symbols: ['glove'], vpBonus: 1, flavor: 'Бере тільки чисті діаманти', avatarIcon: '💎' },
+  { id: 'u_5_3', gangNumber: 5, name: 'Підривник-піротехнік', symbols: ['lock'], vpBonus: 0, flavor: 'Спрямований пластид без зайвого шуму', avatarIcon: '🧨' },
+  { id: 'u_5_4', gangNumber: 5, name: 'Спелеолог каналів', symbols: ['flashlight'], vpBonus: 1, flavor: 'Прямий шлях через колектори міста', avatarIcon: '🧭' },
+  { id: 'u_5_5', gangNumber: 5, name: 'Хімічний розчинник', symbols: ['flashlight', 'coin'], vpBonus: 1, flavor: 'Кислота роз\'їдає титанові засуви', avatarIcon: '🧪' },
+  { id: 'u_5_6', gangNumber: 5, name: 'Аудитор сховищ', symbols: ['coin'], vpBonus: 2, flavor: 'Знає точний розклад інкасацій', avatarIcon: '💼' },
+  { id: 'u_5_7', gangNumber: 5, name: 'Нічний оптичний сканер', symbols: ['flashlight', 'glove'], vpBonus: 1, flavor: 'Обхід лазерних датчиків руху', avatarIcon: '🥽' },
+
+  // --- #6 (Майстри маскування, гримери, дип-фейки) ---
+  { id: 'u_6_1', gangNumber: 6, name: 'Фальшиві документи', symbols: ['mask'], vpBonus: 1, flavor: 'Паспорт для будь-якої митниці', avatarIcon: '🎭' },
+  { id: 'u_6_2', gangNumber: 6, name: 'Димова завіса', symbols: ['wheel'], vpBonus: 0, flavor: 'Ніхто не помітить зникнення', avatarIcon: '💨' },
+  { id: 'u_6_3', gangNumber: 6, name: 'Актриса під прикриттям', symbols: ['mask'], vpBonus: 0, flavor: 'Уся увага охорони на світській леді', avatarIcon: '💃' },
+  { id: 'u_6_4', gangNumber: 6, name: 'Театральний гример', symbols: ['mask'], vpBonus: 2, flavor: 'Повна зміна зовнішності за хвилину', avatarIcon: '🎨' },
+  { id: 'u_6_5', gangNumber: 6, name: 'Тіньовий дипломат', symbols: ['coin', 'mask'], vpBonus: 1, flavor: 'Владнає будь-яке непорозуміння', avatarIcon: '👔' },
+  { id: 'u_6_6', gangNumber: 6, name: 'Фантом нічного клубу', symbols: ['glove'], vpBonus: 1, flavor: 'Непомітно виносить ключові деталі', avatarIcon: '🕶️' },
+  { id: 'u_6_7', gangNumber: 6, name: 'Каскадер-фантом', symbols: ['wheel', 'mask'], vpBonus: 1, flavor: 'Відволікаюча погоня вулицями', avatarIcon: '🏍️' },
+
+  // --- #7 (Силачі, вибивали, важкі тарани) ---
+  { id: 'u_7_1', gangNumber: 7, name: 'Гідравлічний лом', symbols: ['lock'], vpBonus: 0, flavor: 'Жодні петлі не встоять', avatarIcon: '🔩' },
+  { id: 'u_7_2', gangNumber: 7, name: 'Боксер-важковаговик', symbols: ['glove'], vpBonus: 1, flavor: 'Переконливий аргумент у суперечці', avatarIcon: '🥊' },
+  { id: 'u_7_3', gangNumber: 7, name: 'Штурмовик броні', symbols: ['lock'], vpBonus: 1, flavor: 'Пробиває армований бетон', avatarIcon: '🛡️' },
+  { id: 'u_7_4', gangNumber: 7, name: 'Гірський бур', symbols: ['lock'], vpBonus: 0, flavor: 'Прохід підземними тунелями', avatarIcon: '⛏️' },
+  { id: 'u_7_5', gangNumber: 7, name: 'Таран-коваль', symbols: ['lock', 'coin'], vpBonus: 1, flavor: 'Розбиває замки разом із сейфами', avatarIcon: '🔨' },
+  { id: 'u_7_6', gangNumber: 7, name: 'Титановий атлет', symbols: ['lock'], vpBonus: 2, flavor: 'Вириває дверні коробки голіруч', avatarIcon: '🦾' },
+  { id: 'u_7_7', gangNumber: 7, name: 'Нічний патрульний-зрадник', symbols: ['flashlight', 'lock'], vpBonus: 1, flavor: 'Відмикає службові входи', avatarIcon: '🔦' },
+
+  // --- #8 (Дозорні на дахах, далекоглядна оптика, сканери) ---
+  { id: 'u_8_1', gangNumber: 8, name: 'Тепловізор', symbols: ['flashlight'], vpBonus: 0, flavor: 'Бачить охоронців крізь стіни', avatarIcon: '🥽' },
+  { id: 'u_8_2', gangNumber: 8, name: 'Шопер на вітрини', symbols: ['coin'], vpBonus: 1, flavor: 'Знає, де лежить найдорожче', avatarIcon: '🔍' },
+  { id: 'u_8_3', gangNumber: 8, name: 'Дозорний на даху', symbols: ['flashlight'], vpBonus: 1, flavor: 'Патруль ще за три квартали', avatarIcon: '🔭' },
+  { id: 'u_8_4', gangNumber: 8, name: 'Нічний дрон', symbols: ['flashlight'], vpBonus: 0, flavor: 'Повітряна розвідка периметра', avatarIcon: '🛸' },
+  { id: 'u_8_5', gangNumber: 8, name: 'Акустик сигналізацій', symbols: ['flashlight', 'mask'], vpBonus: 1, flavor: 'Чутливе глушіння датчиків руху', avatarIcon: '🎛️' },
+  { id: 'u_8_6', gangNumber: 8, name: 'Оцінник діамантів', symbols: ['coin'], vpBonus: 2, flavor: 'Вибирає лише найчистіші карати', avatarIcon: '💎' },
+  { id: 'u_8_7', gangNumber: 8, name: 'Снайпер-координатор', symbols: ['flashlight', 'wheel'], vpBonus: 1, flavor: 'Очищає дорогу для втечі', avatarIcon: '🎯' },
+
+  // --- #9 (Механіки замків, лазерні різаки, сейфові майстри) ---
+  { id: 'u_9_1', gangNumber: 9, name: 'Лазерний різак', symbols: ['lock'], vpBonus: 1, flavor: 'Акуратний отвір у сейфі за 30 секунд', avatarIcon: '⚡' },
+  { id: 'u_9_2', gangNumber: 9, name: 'Стетоскоп зломника', symbols: ['wheel'], vpBonus: 0, flavor: 'Чутливий слух до клацання коду', avatarIcon: '🩺' },
+  { id: 'u_9_3', gangNumber: 9, name: 'Майстер сейфів', symbols: ['lock'], vpBonus: 0, flavor: 'Швейцарські механізми здаються без бою', avatarIcon: '⚙️' },
+  { id: 'u_9_4', gangNumber: 9, name: 'Гідравлічний прес', symbols: ['lock'], vpBonus: 2, flavor: 'Скручує сталеві засуви у спіраль', avatarIcon: '🦾' },
+  { id: 'u_9_5', gangNumber: 9, name: 'Висотний зварювальник', symbols: ['lock', 'flashlight'], vpBonus: 1, flavor: 'Прорізає вхід через дах банку', avatarIcon: '👨‍🏭' },
+  { id: 'u_9_6', gangNumber: 9, name: 'Швидкісний хакер замків', symbols: ['lock', 'coin'], vpBonus: 1, flavor: 'Миттєве зламування електронних дверей', avatarIcon: '🗝️' },
+  { id: 'u_9_7', gangNumber: 9, name: 'Турбо-зломник', symbols: ['wheel', 'lock'], vpBonus: 1, flavor: 'Зламали сейф і одразу газуємо', avatarIcon: '🏎️' },
+
+  // --- #10 (Контрабандисти, катери, швидкісні коридори) ---
+  { id: 'u_10_1', gangNumber: 10, name: 'Катер у гавані', symbols: ['wheel'], vpBonus: 0, flavor: 'Шлях морем без дорожніх блоків', avatarIcon: '🚤' },
+  { id: 'u_10_2', gangNumber: 10, name: 'Підкуплений митник', symbols: ['coin'], vpBonus: 1, flavor: 'Зелений коридор для вантажу', avatarIcon: '💵' },
+  { id: 'u_10_3', gangNumber: 10, name: 'Вертолітний майданчик', symbols: ['wheel'], vpBonus: 1, flavor: 'Евакуація з даху хмарочоса', avatarIcon: '🚁' },
+  { id: 'u_10_4', gangNumber: 10, name: 'Капітан переправи', symbols: ['wheel'], vpBonus: 0, flavor: 'Через затоку за лічені хвилини', avatarIcon: '⚓' },
+  { id: 'u_10_5', gangNumber: 10, name: 'Експедитор контрабанди', symbols: ['wheel', 'coin'], vpBonus: 1, flavor: 'Сховає будь-яку кількість золота', avatarIcon: '📦' },
+  { id: 'u_10_6', gangNumber: 10, name: 'Пілот спідстера', symbols: ['wheel'], vpBonus: 2, flavor: 'Обжене будь-який поліцейський патруль', avatarIcon: '🏎️' },
+  { id: 'u_10_7', gangNumber: 10, name: 'Диспетчер світлофорів', symbols: ['wheel', 'mask'], vpBonus: 1, flavor: 'Поліція зав\'язне в заторах', avatarIcon: '🚦' },
+
+  // --- #11 (Аукціонні маклери, ювеліри, скупники раритетів) ---
+  { id: 'u_11_1', gangNumber: 11, name: 'Магнітні рукавички', symbols: ['glove'], vpBonus: 0, flavor: 'Легке підкорення висоток', avatarIcon: '🧲' },
+  { id: 'u_11_2', gangNumber: 11, name: 'Аукціонний маклер', symbols: ['coin'], vpBonus: 2, flavor: 'Продає шедеври приватним колекціонерам', avatarIcon: '🏛️' },
+  { id: 'u_11_3', gangNumber: 11, name: 'Ювелірний оцінник', symbols: ['glove'], vpBonus: 1, flavor: 'Інкрустація та розпилювання каміння', avatarIcon: '💍' },
+  { id: 'u_11_4', gangNumber: 11, name: 'Антиквар тіньового цеху', symbols: ['coin'], vpBonus: 1, flavor: 'Безцінні артефакти знаходять покупця', avatarIcon: '🏺' },
+  { id: 'u_11_5', gangNumber: 11, name: 'Золотар синдикату', symbols: ['coin', 'glove'], vpBonus: 1, flavor: 'Переплавка золотих злитків', avatarIcon: '👑' },
+  { id: 'u_11_6', gangNumber: 11, name: 'Швидкісний грабіжник', symbols: ['glove'], vpBonus: 1, flavor: 'Блискавичне викрадення з вітрини', avatarIcon: '🏃' },
+  { id: 'u_11_7', gangNumber: 11, name: 'Королівський контрабандист', symbols: ['coin'], vpBonus: 3, flavor: 'Угоди на мільйони на чорному ринку', avatarIcon: '🎩' },
 ];
 
 export const INITIAL_HEIST_CARDS: HeistCard[] = [

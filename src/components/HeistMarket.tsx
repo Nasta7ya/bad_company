@@ -84,7 +84,7 @@ export const HeistMarket: React.FC<HeistMarketProps> = ({
         )}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         {/* Active Heists of the Player (up to 2) */}
         <div className="space-y-2.5">
           <div className="flex items-center justify-between">
@@ -226,63 +226,12 @@ export const HeistMarket: React.FC<HeistMarketProps> = ({
                     Вільний слот для пограбування ({player.activeHeists.length}/2)
                   </div>
                   <div className="text-[11px] text-slate-400 mt-1 max-w-[180px]">
-                    Натисніть, щоб обрати нову справу з вітрини міста
+                    Натисніть, щоб обрати нову справу
                   </div>
                 </div>
               )}
             </div>
           )}
-        </div>
-
-        {/* City Market Heists (4 available face up) */}
-        <div className="space-y-2.5">
-          <div className="flex items-center justify-between">
-            <h4 className="text-xs font-black text-slate-300 uppercase tracking-wider flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block shadow-sm" />
-              <span>Справи на вітрині міста (4 карти):</span>
-            </h4>
-            <span className="text-[11px] text-slate-400">
-              Обираються після завершення справи
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-2 gap-3">
-            {marketHeists.slice(0, 4).map(heist => (
-              <div
-                key={`market_${heist.id}`}
-                id={`market-heist-${heist.id}`}
-                className="rounded-2xl border border-slate-750 bg-slate-850/80 p-3 shadow-md flex flex-col justify-between hover:border-slate-600 transition-colors"
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className="px-2 py-0.5 rounded-full bg-slate-950 border border-slate-800 text-[11px] font-bold flex items-center gap-1 text-slate-200">
-                    <span>{getTrophyIcon(heist.trophy)}</span>
-                    <span>{getTrophyName(heist.trophy)}</span>
-                  </span>
-
-                  <VPIcon points={heist.vp} size="sm" />
-                </div>
-
-                <div className="font-bold text-xs text-slate-200 leading-tight mb-1 truncate" title={heist.title}>
-                  {heist.title}
-                </div>
-                <div className="text-[10px] text-slate-400 truncate mb-2">
-                  {heist.location}
-                </div>
-
-                <div className="pt-2 border-t border-slate-800 flex flex-wrap gap-1">
-                  {heist.requirements.map((req, rIdx) => (
-                    <span
-                      key={`m_req_${rIdx}`}
-                      className="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800 text-[10px] flex items-center gap-0.5 text-slate-300"
-                      title={getSymbolLabel(req)}
-                    >
-                      {getSymbolIcon(req)}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>
