@@ -193,8 +193,9 @@ export const GangBoard: React.FC<GangBoardProps> = ({
         </div>
       </div>
 
-      {/* Authentic Gang Lineup Cards: 11 Columns (2 to 12) */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-2.5 overflow-x-auto pb-2">
+      {/* Authentic Gang Lineup Cards: 11 Columns (2 to 12) with fluid horizontal scroll on small screens */}
+      <div className="overflow-x-auto pb-2 -mx-1 px-1">
+        <div className="grid grid-cols-11 gap-2.5 min-w-[820px] lg:min-w-0">
         {Array.from({ length: 11 }, (_, i) => i + 2).map(num => {
           const slot = player.gangBoard[num];
           const profile = GANGSTER_PROFILES[num];
@@ -398,12 +399,20 @@ export const GangBoard: React.FC<GangBoardProps> = ({
             </div>
           );
         })}
+        </div>
       </div>
 
       {/* Fixer Choice Modal with Full Heist Requirements & Gang Symbols Verification */}
       {showFixerModal && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
-          <div className="bg-slate-900 border-2 border-amber-500 rounded-3xl p-5 sm:p-6 max-w-3xl w-full shadow-2xl space-y-4 my-auto relative animate-in fade-in zoom-in-95 duration-150">
+        <div
+          id="fixer-modal-backdrop"
+          onClick={onCloseFixerModal}
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 overflow-y-auto cursor-pointer"
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            className="bg-slate-900 border-2 border-amber-500 rounded-3xl p-5 sm:p-6 max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl space-y-4 my-auto relative animate-in fade-in zoom-in-95 duration-150 cursor-default"
+          >
             {/* Modal Header */}
             <div className="flex items-start justify-between gap-3 border-b border-slate-800 pb-3">
               <div className="flex items-center gap-3">

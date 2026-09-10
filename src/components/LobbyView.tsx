@@ -1,41 +1,32 @@
 import React, { useState } from 'react';
 import { GameMode, PlayerColor } from '../types/game';
 import { sound } from '../utils/audio';
-import { Users, Bot, ShieldAlert, Globe, Play, HelpCircle, Volume2, VolumeX, Sparkles, Plus, Award } from 'lucide-react';
+import { Users, Bot, ShieldAlert, Play, HelpCircle, Volume2, VolumeX, Sparkles, Plus, Award } from 'lucide-react';
 
 interface LobbyViewProps {
   onStartVsAI: (playerName: string, botCount: number, playerColor: PlayerColor) => void;
   onStartSoloChallenge: (playerName: string, playerColor: PlayerColor) => void;
   onStartPassAndPlay: (playerNames: string[], colors: PlayerColor[]) => void;
-  onCreateOnlineRoom: (playerName: string, playerColor: PlayerColor) => void;
-  onJoinOnlineRoom: (roomCode: string, playerName: string, playerColor: PlayerColor) => void;
   onOpenRules: () => void;
   isMuted: boolean;
   onToggleMute: () => void;
-  isConnecting?: boolean;
 }
 
 export const LobbyView: React.FC<LobbyViewProps> = ({
   onStartVsAI,
   onStartSoloChallenge,
   onStartPassAndPlay,
-  onCreateOnlineRoom,
-  onJoinOnlineRoom,
   onOpenRules,
   isMuted,
   onToggleMute,
-  isConnecting = false,
 }) => {
-  const [activeTab, setActiveTab] = useState<'ai' | 'solo' | 'pass_play' | 'online'>('ai');
+  const [activeTab, setActiveTab] = useState<'ai' | 'solo' | 'pass_play'>('ai');
   const [playerName, setPlayerName] = useState<string>('Бос Алекса');
   const [selectedColor, setSelectedColor] = useState<PlayerColor>('red');
   const [botCount, setBotCount] = useState<number>(3);
 
   // Pass and play states
   const [passPlayPlayers, setPassPlayPlayers] = useState<string[]>(['Гравець 1', 'Гравець 2', 'Гравець 3']);
-
-  // Online multiplayer states
-  const [roomCodeInput, setRoomCodeInput] = useState<string>('');
 
   const colors: { color: PlayerColor; label: string; hex: string }[] = [
     { color: 'red', label: 'Червоний', hex: 'bg-red-500' },
@@ -90,7 +81,7 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
         {/* Mode Selector Card */}
         <div className="bg-slate-900/90 border border-slate-700/80 rounded-3xl p-6 shadow-2xl backdrop-blur-md space-y-6">
           {/* Mode Tabs */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1 rounded-2xl bg-slate-950/80 border border-slate-800">
+          <div className="grid grid-cols-3 gap-2 p-1 rounded-2xl bg-slate-950/80 border border-slate-800">
             <button
               id="tab-mode-ai"
               type="button"
@@ -134,21 +125,6 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
             >
               <Users className="w-4 h-4" />
               <span>Один екран</span>
-            </button>
-
-            <button
-              id="tab-mode-online"
-              type="button"
-              onClick={() => {
-                sound.playClick();
-                setActiveTab('online');
-              }}
-              className={`py-2.5 px-2 rounded-xl text-xs font-bold transition-all flex flex-col items-center gap-1 cursor-pointer ${
-                activeTab === 'online' ? 'bg-amber-500 text-slate-950 shadow-md' : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Globe className="w-4 h-4" />
-              <span>Онлайн</span>
             </button>
           </div>
 
@@ -246,7 +222,7 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
                   <span>Офіційне соло-випробування проти Поліції</span>
                 </div>
                 <p>
-                  Поліція стартує на клітинці 6 і рухається на <strong>(кубик + 1 крок)</strong> щораунду. Для здобуття кольє потрібно щонайменше 3 однакових трофеї.
+                  Поліція стартує на клітинці 3 і рухається на <strong>(кубик + 1 крок)</strong> щораунду. Для здобуття кольє потрібно щонайменше 3 однакових трофеї.
                 </p>
                 <p className="text-amber-300 font-semibold">
                   Мета: завершити 6 пограбувань або дістатися порту до того, як поліція вас наздожене!
@@ -322,56 +298,6 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
                 <Play className="w-5 h-5 fill-current" />
                 <span>Розпочати гру для {passPlayPlayers.length} гравців</span>
               </button>
-            </div>
-          )}
-
-          {activeTab === 'online' && (
-            <div className="space-y-4 pt-2 border-t border-slate-800">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {/* Create Room */}
-                <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-3 flex flex-col justify-between">
-                  <div>
-                    <div className="font-bold text-sm text-slate-200 mb-1">Створити нову кімнату</div>
-                    <p className="text-xs text-slate-400">
-                      Створіть онлайн-стіл, запросіть до 3 друзів за 4-значним кодом.
-                    </p>
-                  </div>
-                  <button
-                    id="btn-create-online-room"
-                    type="button"
-                    onClick={() => onCreateOnlineRoom(playerName.trim() || 'Бос', selectedColor)}
-                    disabled={isConnecting}
-                    className="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-slate-950 font-bold text-xs shadow transition-transform active:scale-95 cursor-pointer"
-                  >
-                    {isConnecting ? 'Підключення...' : 'Створити кімнату'}
-                  </button>
-                </div>
-
-                {/* Join Room */}
-                <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-3 flex flex-col justify-between">
-                  <div>
-                    <div className="font-bold text-sm text-slate-200 mb-1">Приєднатися за кодом</div>
-                    <input
-                      id="room-code-input"
-                      type="text"
-                      value={roomCodeInput}
-                      onChange={e => setRoomCodeInput(e.target.value.toUpperCase())}
-                      placeholder="Введіть 4 літери (напр. HEIS)"
-                      maxLength={6}
-                      className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm tracking-widest text-center font-mono font-bold focus:border-amber-400 focus:outline-none mt-1"
-                    />
-                  </div>
-                  <button
-                    id="btn-join-online-room"
-                    type="button"
-                    onClick={() => onJoinOnlineRoom(roomCodeInput.trim(), playerName.trim() || 'Гість', selectedColor)}
-                    disabled={!roomCodeInput.trim() || isConnecting}
-                    className="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-200 font-bold text-xs border border-slate-700 shadow transition-transform active:scale-95 cursor-pointer"
-                  >
-                    {isConnecting ? 'Підключення...' : 'Увійти в гру'}
-                  </button>
-                </div>
-              </div>
             </div>
           )}
         </div>

@@ -247,8 +247,15 @@ export const SymbolAllocationModal: React.FC<SymbolAllocationModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-slate-900 border-2 border-amber-500/80 rounded-3xl p-6 max-w-2xl w-full shadow-2xl text-white space-y-4 animate-in fade-in zoom-in duration-200">
+    <div
+      id="symbol-allocation-backdrop"
+      onClick={handleAutoAllocate}
+      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto cursor-pointer"
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        className="bg-slate-900 border-2 border-amber-500/80 rounded-3xl p-4 sm:p-6 max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl text-white space-y-4 cursor-default my-auto animate-in fade-in zoom-in-95 duration-150"
+      >
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-slate-800">
           <div className="flex items-center gap-2.5">

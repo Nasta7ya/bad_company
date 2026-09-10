@@ -129,8 +129,9 @@ export const ScoreBoard: React.FC<ScoreBoardProps> = ({
         </div>
       </div>
 
-      {/* Players status cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+      {/* Players status cards - responsive grid with horizontal scrolling support */}
+      <div className="overflow-x-auto pb-1.5 -mx-1 px-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 min-w-[280px]">
         {players.map((p, idx) => {
           const isPlayerBoss = idx === bossPlayerIndex;
           const isSelf = p.id === currentPlayerId;
@@ -139,8 +140,10 @@ export const ScoreBoard: React.FC<ScoreBoardProps> = ({
             <div
               key={`p_card_${p.id}`}
               id={`player-card-${p.id}`}
-              className={`rounded-xl border p-2.5 flex flex-col justify-between transition-all ${getPlayerBorder(p.color)} ${
-                isSelf ? 'ring-2 ring-amber-400/80' : ''
+              className={`rounded-xl border p-2.5 flex flex-col justify-between transition-all ${
+                isPlayerBoss
+                  ? 'border-amber-400 bg-amber-950/30 ring-2 ring-amber-400/90 shadow-[0_0_15px_rgba(251,191,36,0.3)]'
+                  : 'border-slate-800 bg-slate-900/60 opacity-85'
               }`}
             >
               <div className="flex items-center justify-between mb-1.5">
@@ -186,6 +189,7 @@ export const ScoreBoard: React.FC<ScoreBoardProps> = ({
             </div>
           );
         })}
+        </div>
       </div>
     </div>
   );

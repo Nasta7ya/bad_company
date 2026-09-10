@@ -34,8 +34,15 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({ gameState, onResta
   const winner = sortedPlayers[0];
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-amber-500/80 rounded-3xl p-6 max-w-xl w-full shadow-2xl text-white space-y-5 text-center">
+    <div
+      id="game-over-backdrop"
+      onClick={onRestart}
+      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto cursor-pointer"
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        className="bg-slate-900 border border-amber-500/80 rounded-3xl p-5 sm:p-6 max-w-xl w-full max-h-[92vh] overflow-y-auto shadow-2xl text-white space-y-5 text-center cursor-default my-auto animate-in fade-in zoom-in-95 duration-150"
+      >
         {/* Winner Banner */}
         <div className="w-16 h-16 rounded-2xl bg-amber-500/20 border-2 border-amber-400 flex items-center justify-center text-3xl mx-auto shadow-lg shadow-amber-500/20">
           🏆

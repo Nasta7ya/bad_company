@@ -89,8 +89,15 @@ export const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
   });
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-slate-900 border-2 border-slate-700 rounded-3xl p-5 sm:p-6 max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl text-white space-y-4">
+    <div
+      id="recruitment-modal-backdrop"
+      onClick={onClose}
+      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto cursor-pointer"
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        className="bg-slate-900 border-2 border-slate-700 rounded-3xl p-4 sm:p-6 max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl text-white space-y-4 cursor-default my-auto animate-in fade-in zoom-in-95 duration-150"
+      >
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-3 border-b border-slate-800 shrink-0">
           <div className="flex items-center gap-2.5">
@@ -105,7 +112,7 @@ export const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
                 </span>
               </h3>
               <p className="text-xs text-slate-400">
-                Прокачуйте номери вашої банди 2–12 новими символами та бонусними очками.
+                Прокачуйте номери вашої банди 3–11 новими символами та бонусними очками.
               </p>
             </div>
           </div>
@@ -246,7 +253,7 @@ export const RecruitmentModal: React.FC<RecruitmentModalProps> = ({
                 >
                   Всі
                 </button>
-                {Array.from({ length: 11 }, (_, i) => i + 2).map(num => (
+                {[3, 4, 5, 6, 7, 8, 9, 10, 11].map(num => (
                   <button
                     key={`filt_num_${num}`}
                     type="button"

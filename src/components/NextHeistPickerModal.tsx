@@ -70,8 +70,15 @@ export const NextHeistPickerModal: React.FC<NextHeistPickerModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-slate-900 border-2 border-emerald-500/80 rounded-3xl p-6 max-w-3xl w-full shadow-2xl text-white space-y-4 animate-in fade-in zoom-in duration-200">
+    <div
+      id="next-heist-modal-backdrop"
+      onClick={handleDismiss}
+      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto cursor-pointer"
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        className="bg-slate-900 border-2 border-emerald-500/80 rounded-3xl p-4 sm:p-6 max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl text-white space-y-4 cursor-default my-auto animate-in fade-in zoom-in-95 duration-150"
+      >
         {/* Header with celebration of completed heist */}
         <div className="pb-3 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-3">
@@ -117,13 +124,13 @@ export const NextHeistPickerModal: React.FC<NextHeistPickerModalProps> = ({
         {/* 4 Market Cards Options + Deck Option */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs font-bold text-slate-300 uppercase tracking-wider">
-            <span>Доступні справи на вітрині міста ({marketHeists.length} карт):</span>
+            <span>Доступні нові справи ({marketHeists.length} карт):</span>
             <span className="text-slate-400 font-normal">Оберіть 1 нову справу</span>
           </div>
 
           {marketHeists.length === 0 ? (
             <div className="p-6 rounded-2xl bg-slate-800/80 border border-slate-700 text-center space-y-3">
-              <p className="text-amber-300 font-bold text-sm">Усі справи на вітрині міста вичерпано!</p>
+              <p className="text-amber-300 font-bold text-sm">Усі справи з колоди вичерпано!</p>
               <p className="text-slate-300 text-xs">
                 У місті наразі немає доступних нових справ. Ви можете продовжити раунд без взяття нової справи.
               </p>
